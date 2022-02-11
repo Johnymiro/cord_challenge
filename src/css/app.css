@@ -13,3 +13,9 @@ a {
 input, textarea {
   font-family: 'Lato', sans-serif;
   background-color: transparent; }
+
+.visible {
+  display: block; }
+
+.hidden {
+  display: none; }
