@@ -12,10 +12,28 @@ a {
 
 input, textarea {
   font-family: 'Lato', sans-serif;
-  background-color: transparent; }
+  font-size: 15pt;
+  font-weight: 700;
+  color: #404e5f;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid black;
+  appearance: none;
+  width: 100%;
+  padding: 5px; }
 
 .visible {
   display: block; }
 
 .hidden {
   display: none; }
+
+.input-icons {
+  width: 100%;
+  margin-bottom: 10px; }
+
+.icon {
+  padding: 10px;
+  color: green;
+  min-width: 50px;
+  text-align: center; }

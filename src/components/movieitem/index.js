@@ -84,7 +84,7 @@ const MovieItemWrapper = styled.div`
   background-color: white;
   border-radius: 3px;
   padding: 20px;
-  margin-top: 15px;
+  margin-bottom: 15px;
 `;
 
 const LeftCont = styled.div`
@@ -96,7 +96,6 @@ const RightCont = styled.div`
   flex-direction: column;
   justify-content: space-between;
   margin-left: 20px;
-  border: 1px solid aqua;
   width: auto;
   max-height: 265px;
 `;
