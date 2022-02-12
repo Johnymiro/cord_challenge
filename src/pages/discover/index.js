@@ -65,7 +65,7 @@ export default class Discover extends React.Component {
 }
 
 const DiscoverWrapper = styled.main`
-  padding: 60px 35px;
+  padding: 60px 45px;
 `
 
 const TotalCounter = styled.div`

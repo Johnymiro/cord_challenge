@@ -11,6 +11,8 @@ export default class MovieList extends React.Component {
     return (
       <MoviesWrapper>
         {/* Finish the MovieItem component and use it here to display the movie results */}
+        <MovieItem />
+        <MovieItem />
       </MoviesWrapper>
     )
   }
@@ -18,4 +20,5 @@ export default class MovieList extends React.Component {
 
 const MoviesWrapper = styled.div`
   position: relative;
+
 `
