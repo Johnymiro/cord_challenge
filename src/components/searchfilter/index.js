@@ -1,17 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styled, { css } from "styled-components";
 
 import * as colors from "../../colors";
 import ExpandableFilter from "../../components/expandablefilter";
 import SearchBar from "../../components/searchbar";
+import { AppContext } from "../../context";
 
 export default function SearchFilters(props) {
-  const [searchText, setSearchText] = useState("");
   const { genres, ratings, languages, searchMovies } = props;
-
-  useEffect(() => {
-    console.log(searchText);
-  }, [searchText]);
+  const { searchText, setSearchText } = useContext(AppContext);
 
   return (
     <FiltersWrapper>
@@ -28,7 +25,6 @@ export default function SearchFilters(props) {
   );
 }
 
-const Input = styled.input``;
 
 const FiltersWrapper = styled.div`
   position: relative;

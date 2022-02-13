@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 
 import * as colors from "../../colors";
@@ -7,51 +7,36 @@ import * as fetcher from "../../fetcher";
 import SearchFilters from "../../components/searchfilter";
 import MovieList from "../../components/movielist";
 import useMediaQuery from "../../hooks/useMediaQuery";
+import { getDiscoverMovies } from "../../fetcher";
+import { AppContext } from "../../context";
 
 export default function Discover(props) {
   const isDesktop = useMediaQuery("(min-width: 960px)");
-
-  const state = {
-    keyword: "",
-    year: 0,
-    results: [],
-    totalCount: 0,
-    genreOptions: [],
-    ratingOptions: [
-      { id: 7.5, name: 7.5 },
-      { id: 8, name: 8 },
-      { id: 8.5, name: 8.5 },
-      { id: 9, name: 9 },
-      { id: 9.5, name: 9.5 },
-      { id: 10, name: 10 },
-    ],
-    languageOptions: [
-      { id: "GR", name: "Greek" },
-      { id: "EN", name: "English" },
-      { id: "RU", name: "Russian" },
-      { id: "PO", name: "Polish" },
-    ],
-  };
-
-  const searchMovies = () => {};
+  const {
+    genreOptions,
+    languageOptions,
+    ratingOptions,
+    totalCount,
+    results,
+    initDiscoverList,
+  } = useContext(AppContext);
 
   // Write a function to preload the popular movies when page loads & get the movie genres
 
   // Write a function to trigger the API request and load the search results based on the keyword and year given as parameters
 
-  const { genreOptions, languageOptions, ratingOptions, totalCount, results } =
-    state;
 
   return (
     <DiscoverWrapper>
-      <MobilePageTitle className={!isDesktop ? "visible" : "hidden"}>Discover</MobilePageTitle>{" "}
+      <MobilePageTitle className={!isDesktop ? "visible" : "hidden"}>
+        Discover
+      </MobilePageTitle>{" "}
       {/* MobilePageTitle should become visible on small screens & mobile devices*/}
-      <MovieFilters >
+      <MovieFilters>
         <SearchFilters
-          genres={genreOptions}
+        /*           genres={genreOptions}
           ratings={ratingOptions}
-          languages={languageOptions}
-          searchMovies={(keyword, year) => searchMovies(keyword, year)}
+          languages={languageOptions} */
         />
       </MovieFilters>
       <MovieResults>
@@ -68,7 +53,7 @@ const DiscoverWrapper = styled.main`
   flex-direction: row-reverse;
   margin-top: 15px;
 
-  @media(max-width: 960px) {
+  @media (max-width: 960px) {
     flex-direction: column;
     margin-top: 0;
     padding-top: 30px;
@@ -88,7 +73,7 @@ const MovieFilters = styled.div`
   flex-grow: 1;
   min-width: 300px;
 
-  @media(max-width: 960px) {
+  @media (max-width: 960px) {
     margin-left: 0;
   }
 `;

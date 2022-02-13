@@ -17,11 +17,7 @@ textarea::placeholder {
 
 input:focus,
 textarea:focus {
-  outline: none;
-  zoom: 105%; }
-
-input:hover {
-  zoom: 105%; }
+  outline: none; }
 
 input,
 textarea {

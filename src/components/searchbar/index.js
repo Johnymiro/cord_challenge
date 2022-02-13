@@ -14,7 +14,7 @@ export default function SearchBar({ searchText, setSearchText }) {
       <InputIcons>
         <Input
           onChange={(e) => setSearchText(e.target.value)}
-          defaultValue={searchText}
+          value={searchText}
           type="text"
           placeholder="Search for movies"
         />
