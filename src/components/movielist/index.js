@@ -13,6 +13,9 @@ export default class MovieList extends React.Component {
         {/* Finish the MovieItem component and use it here to display the movie results */}
         <MovieItem />
         <MovieItem />
+        <MovieItem />
+        <MovieItem />
+        <MovieItem />
       </MoviesWrapper>
     )
   }

@@ -17,19 +17,7 @@ export default function SearchFilters(props) {
     <FiltersWrapper>
       <SearchFiltersCont className="search_inputs_cont" marginBottom>
         {/* Implement a "SearchBar" component and re-use it for the keyword and the year inputs */}
-        <Input
-          onChange={(e) => setSearchText(e.target.value)}
-          defaultValue={searchText}
-          type="text"
-          placeholder="Enter text"
-        />
-        &nbsp;
-        <Input
-          onChange={(e) => {}}
-          defaultValue={""}
-          type="text"
-          placeholder="Enter text"
-        />
+        <SearchBar searchText={searchText} setSearchText={setSearchText} />
       </SearchFiltersCont>
       <SearchFiltersCont>
         <CategoryTitle>Movie</CategoryTitle>

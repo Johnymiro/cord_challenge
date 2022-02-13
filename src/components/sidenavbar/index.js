@@ -23,7 +23,7 @@ export default function SideNavBar() {
         exact
       >
         Wesley
-        <NavIcon arrow></NavIcon>
+        <NavIcon arrow src={Arrow}></NavIcon>
       </SideNavMainLink>
       <SideNavMainLink
         onClick={() => setSelected("discover")}
@@ -32,7 +32,7 @@ export default function SideNavBar() {
         to="/discover"
       >
         Discover
-        <NavIcon search></NavIcon>
+        <NavIcon search src={SearchWhite}></NavIcon>
       </SideNavMainLink>
       <SideNavHeader>
         <HeaderText>Watched</HeaderText>
@@ -86,7 +86,7 @@ const SideNavBarCont = styled.div`
 
   color: white;
   box-sizing: border-box;
-  padding-top: 35px;
+  padding-top: 20px;
   display: flex;
   flex-direction: column;
 `;
@@ -105,10 +105,10 @@ const SideNavMainLink = styled(Link)`
   }
 `;
 
-const NavIcon = styled.div`
+const NavIcon = styled.img`
   position: absolute;
   right: 35px;
-  top: 50%;
+  top: ${(props) => (props.search ? "30%" : "40%")};
 `;
 
 const SideNavHeader = styled.div`
