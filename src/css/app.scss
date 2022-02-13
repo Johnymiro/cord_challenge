@@ -33,7 +33,8 @@ input, textarea {
 }
 
 .hidden{
-  display: none;
+  position: absolute;
+  left: -260px;
 }
 
 .input-icons i {

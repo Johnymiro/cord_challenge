@@ -26,7 +26,8 @@ input, textarea {
   display: block; }
 
 .hidden {
-  display: none; }
+  position: absolute;
+  left: -260px; }
 
 .input-icons {
   width: 100%;
