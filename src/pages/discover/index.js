@@ -46,7 +46,7 @@ export default function Discover(props) {
     <DiscoverWrapper>
       <MobilePageTitle className={!isDesktop ? "visible" : "hidden"}>Discover</MobilePageTitle>{" "}
       {/* MobilePageTitle should become visible on small screens & mobile devices*/}
-      <MovieFilters className={isDesktop ? "visible" : "hidden"}>
+      <MovieFilters >
         <SearchFilters
           genres={genreOptions}
           ratings={ratingOptions}
@@ -67,6 +67,12 @@ const DiscoverWrapper = styled.main`
   display: flex;
   flex-direction: row-reverse;
   margin-top: 15px;
+
+  @media(max-width: 960px) {
+    flex-direction: column;
+    margin-top: 0;
+    padding-top: 30px;
+  }
 `;
 
 const TotalCounter = styled.div`
@@ -81,8 +87,14 @@ const MovieFilters = styled.div`
   margin-left: 15px;
   flex-grow: 1;
   min-width: 300px;
+
+  @media(max-width: 960px) {
+    margin-left: 0;
+  }
 `;
 
 const MobilePageTitle = styled.header`
-  background-color: grey;
+  margin-bottom: 20px;
+  padding: 20px 0;
+  font-size: 22pt;
 `;

@@ -31,6 +31,9 @@ export default class App extends React.Component {
 
 const ContentWrapper = styled.main`
   padding-left: 260px;
+  @media (max-width: 960px) {
+    padding-left: 0;
+  }
 `;
 
 const PageContainer = styled.main`

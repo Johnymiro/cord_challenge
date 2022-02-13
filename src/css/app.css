@@ -37,11 +37,14 @@ textarea {
   padding: 5px; }
 
 .visible {
-  display: block; }
+  position: static;
+  transition: all 300ms ease;
+  left: 0px; }
 
 .hidden {
   position: absolute;
-  left: -260px; }
+  transition: all 300ms ease;
+  left: -360px; }
 
 .input-icons {
   width: 100%;
