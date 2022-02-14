@@ -13,7 +13,7 @@ a {
 input::placeholder,
 textarea::placeholder {
   color: #c4ca18;
-  font-weight: 200; }
+  font-weight: 100; }
 
 input:focus,
 textarea:focus {
@@ -51,3 +51,7 @@ textarea {
   color: green;
   min-width: 50px;
   text-align: center; }
+
+/* width */
+::-webkit-scrollbar {
+  display: none; }

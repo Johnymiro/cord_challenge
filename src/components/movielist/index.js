@@ -11,10 +11,10 @@ export default function MovieList() {
     <MoviesWrapper>
       {/* Finish the MovieItem component and use it here to display the movie results */}
       {imagesBaseUrl &&
-        results?.map((movie) => {
+        results?.map((movie, index) => {
           return (
             <MovieItem
-              key={movie.original_title}
+              key={movie.original_title + index}
               imgBaseUrl={imagesBaseUrl}
               {...movie}
             />

@@ -103,12 +103,7 @@ const ContextProvider = ({ children }) => {
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
       handleSearchMovie();
-      // Send Axios request here
-    }, 1000);
-
-    /*     if (!searchText && !state.results?.length) {
-      initDiscoverList();
-    } */
+    }, 500);
 
     return () => clearTimeout(delayDebounceFn);
   }, [searchText]);

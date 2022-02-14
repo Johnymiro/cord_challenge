@@ -16,7 +16,7 @@ a {
 input::placeholder,
 textarea::placeholder {
   color: $primaryColor;
-  font-weight: 200;
+  font-weight: 100;
 }
 
 input:focus,
@@ -68,3 +68,9 @@ textarea {
   min-width: 50px;
   text-align: center;
 }
+
+/* width */
+::-webkit-scrollbar {
+ display: none;
+}
+

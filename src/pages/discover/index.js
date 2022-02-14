@@ -59,6 +59,7 @@ const DiscoverWrapper = styled.main`
   @media (max-width: 960px) {
     flex-direction: column;
     margin-top: 0;
+  padding: 60px 15px;
     padding-top: 30px;
   }
 `;
