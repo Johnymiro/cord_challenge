@@ -16,7 +16,8 @@ export const getDiscoverList = (page = 1) => {
 };
 
 export const searchMovieByName = (name) => {
-  const queryString = name.toLowercase().split(" ").join("+");
+  if (!name) return;
+  const queryString = name.toLowerCase().split(" ").join("+");
   const url = `${baseUrl}/3/search/movie?api_key=${api_key}&query=${queryString}`;
 
   return axios.get(url);

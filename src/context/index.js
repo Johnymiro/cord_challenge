@@ -1,13 +1,13 @@
 import { useEffect, useState, createContext, useReducer } from "react";
-import { getConfig, getDiscoverList } from "../fetcher";
+import { getConfig, getDiscoverList, searchMovieByName } from "../fetcher";
 
 const initState = {
   searchText: "",
   imagesBaseUrl: "",
-  discoverList: null,
   keyword: "",
   searchResults: null,
   genreOptions: [],
+  totalCount: 0,
   ratingOptions: [
     { id: 7.5, name: 7.5 },
     { id: 8, name: 8 },
@@ -36,7 +36,7 @@ const reducer = (state, action) => {
     case actionTypes.setImgBaseUrl:
       return { ...state, imagesBaseUrl: action.payload };
     case actionTypes.setDiscoverList:
-      return { ...state, discoverList: action.payload };
+      return handleDiscoverListReducer(state, action.payload);
     case actionTypes.setSearchText:
       return { ...state, searchText: action.payload };
     case actionTypes.setState:
@@ -46,22 +46,37 @@ const reducer = (state, action) => {
   }
 };
 
+function handleDiscoverListReducer(state, list) {
+  console.log("fetching");
+  return {
+    ...state,
+    page: list.page,
+    results: list.results,
+    totalCount: list.totalCount,
+  };
+}
+
 export const AppContext = createContext();
 
 const ContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initState);
-  const { imagesBaseUrl, searchText, discoverList, searchResults } = state;
-
-  useEffect(() => {
-    console.log("search text", searchText);
-  }, [searchText]);
+  const { imagesBaseUrl, searchText } = state;
 
   const handleImageBaseUrl = async () => {
     try {
       const url = await getConfig().then(
         (res) => res.data?.images?.secure_base_url
       );
-      dispatch({ type: actionTypes.setImgBaseUrl, payload: url });
+      return dispatch({ type: actionTypes.setImgBaseUrl, payload: url });
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const initDiscoverList = async () => {
+    try {
+      const list = await getDiscoverList().then((res) => res.data);
+      dispatch({ type: actionTypes.setDiscoverList, payload: list });
     } catch (err) {
       console.error(err);
     }
@@ -70,14 +85,13 @@ const ContextProvider = ({ children }) => {
   const setSearchText = (text) =>
     dispatch({ type: actionTypes.setSearchText, payload: text });
 
-  const initDiscoverList = async () => {
-    try {
-      const list = await getDiscoverList().then((res) => res.data);
-      dispatch({ type: actionTypes.setDiscoverList, payload: list });
-      console.log("list", list);
-    } catch (err) {
-      console.error(err);
+  const handleSearchMovie = async () => {
+    if (searchText.length === 0) {
+      initDiscoverList();
+      return;
     }
+    const results = await searchMovieByName(searchText).then((res) => res.data);
+    dispatch({ type: actionTypes.setDiscoverList, payload: results });
   };
 
   useEffect(() => {
@@ -86,14 +100,25 @@ const ContextProvider = ({ children }) => {
     }
   }, []);
 
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(() => {
+      handleSearchMovie();
+      // Send Axios request here
+    }, 1000);
+
+    /*     if (!searchText && !state.results?.length) {
+      initDiscoverList();
+    } */
+
+    return () => clearTimeout(delayDebounceFn);
+  }, [searchText]);
+
   return (
     <AppContext.Provider
       value={{
         setSearchText,
-        searchText,
         initDiscoverList,
-        discoverList,
-        searchResults,
+        ...state,
       }}
     >
       {children}

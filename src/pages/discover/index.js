@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
 
 import * as colors from "../../colors";
@@ -19,12 +19,15 @@ export default function Discover(props) {
     totalCount,
     results,
     initDiscoverList,
+    imagesBaseUrl,
   } = useContext(AppContext);
 
   // Write a function to preload the popular movies when page loads & get the movie genres
 
   // Write a function to trigger the API request and load the search results based on the keyword and year given as parameters
-
+  useEffect(() => {
+    initDiscoverList();
+  }, []);
 
   return (
     <DiscoverWrapper>
@@ -41,7 +44,7 @@ export default function Discover(props) {
       </MovieFilters>
       <MovieResults>
         {totalCount > 0 && <TotalCounter>{totalCount} results</TotalCounter>}
-        <MovieList movies={results || []} genres={genreOptions || []} />
+        <MovieList />
       </MovieResults>
     </DiscoverWrapper>
   );

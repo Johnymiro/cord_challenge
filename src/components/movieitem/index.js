@@ -6,30 +6,33 @@ const movieUrl =
   "https://image.tmdb.org/t/p/w500/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg";
 export default class MovieItem extends React.Component {
   render() {
+    const {
+      imgBaseUrl,
+      overview,
+      poster_path,
+      release_date,
+      title,
+      vote_average,
+    } = this.props;
+
+    const imgSrc = `${imgBaseUrl}w500${poster_path}`;
+
     return (
       // Complete the MovieItem component
       <MovieItemWrapper>
         <LeftCont>
-          <Image src={movieUrl} alt={"moviePoster"} />
+          <Image src={imgSrc} alt={"moviePoster"} />
         </LeftCont>
         <RightCont>
           <div style={{ zIndex: 2 }}>
             <Heading>
-              <Title>Bad Genius</Title>
-              <Points>1.4</Points>
+              <Title>{title}</Title>
+              <Points>{vote_average}</Points>
             </Heading>
             <Label> Label </Label>
-            <Description>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </Description>
+            <Description>{overview}</Description>
           </div>
-          <ReleaseDate>2017-05-03</ReleaseDate>
+          <ReleaseDate>{release_date}</ReleaseDate>
         </RightCont>
       </MovieItemWrapper>
     );
@@ -62,8 +65,7 @@ const Label = styled.div`
   color: ${colors.primaryColor};
 `;
 
-const Description = styled.div`
-`;
+const Description = styled.div``;
 
 const ReleaseDate = styled.div`
   color: ${colors.primaryColor};

@@ -1,27 +1,29 @@
-import React from "react";
-import styled from 'styled-components';
+import React, { useState, useContext, useEffect } from "react";
+import styled from "styled-components";
+import { AppContext } from "../../context";
 
-import MovieItem from '../movieitem';
+import MovieItem from "../movieitem";
 
-export default class MovieList extends React.Component {
+export default function MovieList() {
+  const { results, imagesBaseUrl } = useContext(AppContext);
 
-  render () {
-    const { movies, genres } = this.props;
-
-    return (
-      <MoviesWrapper>
-        {/* Finish the MovieItem component and use it here to display the movie results */}
-        <MovieItem />
-        <MovieItem />
-        <MovieItem />
-        <MovieItem />
-        <MovieItem />
-      </MoviesWrapper>
-    )
-  }
+  return (
+    <MoviesWrapper>
+      {/* Finish the MovieItem component and use it here to display the movie results */}
+      {imagesBaseUrl &&
+        results?.map((movie) => {
+          return (
+            <MovieItem
+              key={movie.original_title}
+              imgBaseUrl={imagesBaseUrl}
+              {...movie}
+            />
+          );
+        })}
+    </MoviesWrapper>
+  );
 }
 
 const MoviesWrapper = styled.div`
   position: relative;
-
-`
+`;
