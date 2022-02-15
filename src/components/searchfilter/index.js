@@ -1,14 +1,16 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import styled, { css } from "styled-components";
 
 import * as colors from "../../colors";
 import ExpandableFilter from "../../components/expandablefilter";
 import SearchBar from "../../components/searchbar";
+import useMediaQuery from "../../hooks/useMediaQuery";
 import { AppContext } from "../../context";
 
 export default function SearchFilters(props) {
   const { genres, ratings, languages, searchMovies } = props;
   const { searchText, setSearchText } = useContext(AppContext);
+  const isDesktop = useMediaQuery("max-width: 960px");
 
   return (
     <FiltersWrapper>
@@ -16,15 +18,16 @@ export default function SearchFilters(props) {
         {/* Implement a "SearchBar" component and re-use it for the keyword and the year inputs */}
         <SearchBar searchText={searchText} setSearchText={setSearchText} />
       </SearchFiltersCont>
-      <SearchFiltersCont>
-        <CategoryTitle>Movie</CategoryTitle>
-        {/* Implement a component called "ExpandableFilter" and apply it to all filter categories */}
-        Categories..
-      </SearchFiltersCont>
+      {isDesktop && (
+        <SearchFiltersCont>
+          <CategoryTitle>Movie</CategoryTitle>
+          {/* Implement a component called "ExpandableFilter" and apply it to all filter categories */}
+          Categories..
+        </SearchFiltersCont>
+      )}
     </FiltersWrapper>
   );
 }
-
 
 const FiltersWrapper = styled.div`
   position: relative;
@@ -41,6 +44,11 @@ const SearchFiltersCont = styled.div`
     css`
       margin-bottom: 15px;
     `}
+
+  @media(max-width: 960px) {
+    background-color: #f6f7f9;
+    padding: 0;
+  }
 `;
 
 const CategoryTitle = styled.div``;

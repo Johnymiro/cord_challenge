@@ -1,5 +1,6 @@
 import { useEffect, useState, createContext, useReducer } from "react";
 import { getConfig, getDiscoverList, searchMovieByName } from "../fetcher";
+import { useToggle } from "../hooks/useToggle";
 
 const initState = {
   searchText: "",
@@ -47,12 +48,12 @@ const reducer = (state, action) => {
 };
 
 function handleDiscoverListReducer(state, list) {
-  console.log("fetching");
+  console.log("fetching", list);
   return {
     ...state,
     page: list.page,
     results: list.results,
-    totalCount: list.totalCount,
+    totalCount: list.total_results,
   };
 }
 
@@ -61,6 +62,7 @@ export const AppContext = createContext();
 const ContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initState);
   const { imagesBaseUrl, searchText } = state;
+  const [mobileNavBarOpen, toggleMobileNavBar] = useToggle(false);
 
   const handleImageBaseUrl = async () => {
     try {
@@ -113,6 +115,8 @@ const ContextProvider = ({ children }) => {
       value={{
         setSearchText,
         initDiscoverList,
+        mobileNavBarOpen,
+        toggleMobileNavBar,
         ...state,
       }}
     >

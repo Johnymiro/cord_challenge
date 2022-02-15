@@ -48,10 +48,10 @@ const Title = styled.div`
   font-size: 20pt;
   font-weight: bold;
 
-  @media(max-width: 670px) {
+  @media (max-width: 670px) {
     font-size: 16pt;
   }
-  @media(max-width: 500px) {
+  @media (max-width: 500px) {
     font-size: 12pt;
   }
 `;
@@ -75,14 +75,14 @@ const Label = styled.div`
 const Description = styled.div`
   max-height: 150px;
   overflow: auto;
-  
-  @media(max-width: 670px) {
-  -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
-  mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+
+  @media (max-width: 670px) {
+    -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
     max-height: 100px;
     font-size: 10pt;
   }
-  @media(max-width: 500px) {
+  @media (max-width: 500px) {
     max-height: 75px;
     font-size: 8.5pt;
   }
@@ -98,10 +98,10 @@ const Image = styled.img`
   width: auto;
   height: 265px;
   border-radius: 3px;
-  @media(max-width: 670px) {
+  @media (max-width: 670px) {
     height: 200px;
   }
-  @media(max-width: 500px) {
+  @media (max-width: 500px) {
     height: 185px;
   }
 `;
@@ -114,8 +114,8 @@ const MovieItemWrapper = styled.div`
   border-radius: 3px;
   padding: 20px;
   margin-bottom: 15px;
-  @media(max-width: 670px) {
-  padding: 10px;
+  @media (max-width: 670px) {
+    padding: 10px;
   }
 `;
 

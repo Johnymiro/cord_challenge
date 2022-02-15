@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
+import HamburguerIcon from "../../images/hamburguer-icon.png";
 
 import * as colors from "../../colors";
 import * as fetcher from "../../fetcher";
@@ -12,15 +13,8 @@ import { AppContext } from "../../context";
 
 export default function Discover(props) {
   const isDesktop = useMediaQuery("(min-width: 960px)");
-  const {
-    genreOptions,
-    languageOptions,
-    ratingOptions,
-    totalCount,
-    results,
-    initDiscoverList,
-    imagesBaseUrl,
-  } = useContext(AppContext);
+  const { totalCount, initDiscoverList, toggleMobileNavBar } =
+    useContext(AppContext);
 
   // Write a function to preload the popular movies when page loads & get the movie genres
 
@@ -30,25 +24,32 @@ export default function Discover(props) {
   }, []);
 
   return (
-    <DiscoverWrapper>
-      <MobilePageTitle className={!isDesktop ? "visible" : "hidden"}>
-        Discover
-      </MobilePageTitle>{" "}
-      {/* MobilePageTitle should become visible on small screens & mobile devices*/}
-      <MovieFilters>
-        <SearchFilters
-        /*           genres={genreOptions}
+    <>
+      <DiscoverWrapper>
+        <MobilePageTitle className={!isDesktop ? "visible" : "hidden"}>
+          <Icon onClick={toggleMobileNavBar} src={HamburguerIcon} />
+          &nbsp; &nbsp; Discover
+        </MobilePageTitle>{" "}
+        {/* MobilePageTitle should become visible on small screens & mobile devices*/}
+        <MovieFilters>
+          <SearchFilters
+          /*           genres={genreOptions}
           ratings={ratingOptions}
           languages={languageOptions} */
-        />
-      </MovieFilters>
-      <MovieResults>
-        {totalCount > 0 && <TotalCounter>{totalCount} results</TotalCounter>}
-        <MovieList />
-      </MovieResults>
-    </DiscoverWrapper>
+          />
+        </MovieFilters>
+        <MovieResults>
+          {totalCount > 0 && <TotalCounter>{totalCount} results</TotalCounter>}
+          <MovieList />
+        </MovieResults>
+      </DiscoverWrapper>
+    </>
   );
 }
+
+const Icon = styled.img`
+  width: 55px;
+`;
 
 const DiscoverWrapper = styled.main`
   padding: 60px 45px;
@@ -59,17 +60,24 @@ const DiscoverWrapper = styled.main`
   @media (max-width: 960px) {
     flex-direction: column;
     margin-top: 0;
-  padding: 60px 15px;
+    padding: 60px 17px;
     padding-top: 30px;
   }
 `;
 
 const TotalCounter = styled.div`
-  font-weight: 900;
+  position: absolute;
+  font-weight: 500;
+  top: -35px;
 `;
 
 const MovieResults = styled.div`
+  position: relative;
   flex-grow: 2;
+
+  @media (max-width: 960px) {
+    margin-top: 80px;
+  }
 `;
 
 const MovieFilters = styled.div`
@@ -86,4 +94,6 @@ const MobilePageTitle = styled.header`
   margin-bottom: 20px;
   padding: 20px 0;
   font-size: 22pt;
+  display: flex;
+  align-items: center;
 `;

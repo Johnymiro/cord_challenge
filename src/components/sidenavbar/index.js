@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styled, { css, useTheme } from "styled-components";
 import { NavLink as Link } from "react-router-dom";
 
@@ -6,14 +6,23 @@ import * as colors from "../../colors";
 import Arrow from "../../images/arrow-icon.png";
 import SearchWhite from "../../images/search-icon-white.png";
 import useMediaQuery from "../../hooks/useMediaQuery";
+import { AppContext } from "../../context";
 
 export default function SideNavBar() {
   /* Write the necessary functions to show and hide the side bar on small devices */
   const isDesktop = useMediaQuery("(min-width: 960px)");
   const [selected, setSelected] = useState("");
+  const { mobileNavBarOpen, toggleMobileNavBar } = useContext(AppContext);
 
+  const handleOnClick = (event) => {
+    if (isDesktop) return;
+    event.preventDefault();
+    toggleMobileNavBar();
+  };
   return (
-    <SideNavBarCont className={isDesktop ? "visible" : "hidden"}>
+    <SideNavBarCont
+      className={isDesktop || mobileNavBarOpen ? "visible" : "hidden"}
+    >
       {/* Implement a hamburger icon slide in effect for small devices */}
       <SideNavMainLink
         onClick={() => setSelected("wesley")}
@@ -23,7 +32,9 @@ export default function SideNavBar() {
         exact
       >
         Wesley
-        <NavIcon arrow src={Arrow}></NavIcon>
+        <div style={{height: "100%", width: "50px"}} onClick={handleOnClick}>
+          <NavIcon isMobile={!isDesktop} arrow src={Arrow}></NavIcon>
+        </div>
       </SideNavMainLink>
       <SideNavMainLink
         onClick={() => setSelected("discover")}
@@ -109,6 +120,12 @@ const NavIcon = styled.img`
   position: absolute;
   right: 35px;
   top: ${(props) => (props.search ? "30%" : "40%")};
+  transition: all 200ms ease;
+
+  @media (max-width: 960px) {
+    transform: ${(props) => (props.isMobile ? "rotate(90deg)" : "")};
+    transition: all 200ms ease;
+  }
 `;
 
 const SideNavHeader = styled.div`
